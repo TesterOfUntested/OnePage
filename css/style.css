@@ -351,7 +351,7 @@ a:after {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    background-image: url('../images/bg1.jpg');
+    background-image: url('../images/background.jpg');
 }
 
 #headerwrap h1 {
