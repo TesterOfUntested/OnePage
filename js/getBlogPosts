@@ -1,0 +1,44 @@
+async function fetchAndDisplayPosts() {
+    try {
+        const response = await fetch('http://localhost:8080/posts/getAllPosts');
+        const posts = await response.json();
+
+        // Wybieramy tylko pierwsze 10 postów
+        const firstTenPosts = posts.slice(0, 10);
+
+        let html = ''; // Pusty string na kod HTML
+
+        // Iterujemy przez posty i tworzymy odpowiedni kod HTML
+        for (let i = 0; i < firstTenPosts.length; i++) {
+            // Jeśli to początek nowego rzędu, otwórz nowy div.row
+            if (i % 3 === 0) {
+                html += '<div class="row">';
+            }
+
+            // Dodajemy col-md-4 dla każdego posta
+            html += `<div class="col-md-4">
+                        <div class="post">
+                            <h2>${firstTenPosts[i].title}</h2>
+                            <p>${firstTenPosts[i].content}</p>
+                        </div>
+                     </div>`;
+
+            // Jeśli to koniec rzędu, zamknij div.row
+            if ((i + 1) % 3 === 0 || i === firstTenPosts.length - 1) {
+                html += '</div>'; // Zamknij div.row
+            }
+        }
+
+        const postsContainer = document.getElementById('postsContainer');
+
+        if (postsContainer) {
+            postsContainer.innerHTML = html;
+        } else {
+            console.error('Element o id "postsContainer" nie został znaleziony.');
+        }
+    } catch (error) {
+        console.error('Błąd podczas pobierania i wyświetlania postów:', error);
+    }
+}
+
+fetchAndDisplayPosts();
