@@ -1,6 +1,6 @@
 async function fetchAndDisplayPosts(pageNumber = 1, postsPerPage = 9) {
     try {
-        const response = await fetch('http://localhost:8080/posts/getAllPosts');
+        const response = await fetch('http://172.30.237.18:8080/posts/getAllPosts');
         const posts = await response.json();
 
         // Obliczamy indeks początkowy i końcowy dla aktualnej strony
