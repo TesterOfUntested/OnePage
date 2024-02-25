@@ -1,6 +1,13 @@
-async function fetchAndDisplayPosts(pageNumber = 1, postsPerPage = 9) {
+document.addEventListener('DOMContentLoaded', function() {
+    const blogContainer = document.getElementById('blog');
+    const apiEndpoint = blogContainer.getAttribute('data-api-endpoint');
+
+    fetchAndDisplayPosts(apiEndpoint);
+});
+
+async function fetchAndDisplayPosts(apiEndpoint, pageNumber = 1, postsPerPage = 9) {
     try {
-        const response = await fetch('http://172.30.237.18:8080/posts/getAllPosts');
+        const response = await fetch(apiEndpoint);
         const posts = await response.json();
 
         // Obliczamy indeks początkowy i końcowy dla aktualnej strony
