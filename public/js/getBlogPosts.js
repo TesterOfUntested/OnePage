@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 async function fetchAndDisplayPosts(apiEndpoint, pageNumber = 1, postsPerPage = 9) {
     try {
+        console.log(apiEndpoint);
+
         const response = await fetch(apiEndpoint);
         const posts = await response.json();
 
