@@ -1,1 +1,6 @@
 node_modules
+*.pem
+*p12
+
+config.json
+databaseConfig.js
