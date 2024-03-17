@@ -46,6 +46,44 @@ app.get('/posts', async (req, res) => {
     }
 });
 
+app.get('/tech_posts', async (req, res) => {
+    try {
+        const queryResult = await queryDatabase('SELECT * FROM tech_posts', []);
+        res.json(queryResult);
+    } catch (error) {
+        console.error('Błąd podczas pobierania postów z bazy danych:', error);
+        res.status(500).json({ error: 'Wystąpił błąd podczas pobierania postów z bazy danych.' });
+    }
+});
+
+app.get('/post/:id', async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const sql = 'SELECT * FROM posts WHERE id = ?';
+
+        const queryResult = await queryDatabase(sql, [postId]);
+
+        res.json(queryResult);
+    } catch (error) {
+        console.error('Błąd podczas pobierania postu z bazy danych:', error);
+        res.status(500).json({ error: 'Wystąpił błąd podczas pobierania postu z bazy danych.' });
+    }
+});
+
+app.get('/tech_post/:id', async (req, res) => {
+    try {
+        const postId = req.params.id;
+        const sql = 'SELECT * FROM tech_posts WHERE id = ?';
+
+        const queryResult = await queryDatabase(sql, [postId]);
+
+        res.json(queryResult);
+    } catch (error) {
+        console.error('Błąd podczas pobierania postu z bazy danych:', error);
+        res.status(500).json({ error: 'Wystąpił błąd podczas pobierania postu z bazy danych.' });
+    }
+});
+
 
 app.get('/config.json', (req, res) => {
     const configPath = path.join(__dirname, 'config.json');
